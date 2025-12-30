@@ -5,6 +5,7 @@
   <title>Vrénae — Customised Perfumes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
@@ -19,8 +20,10 @@
       font-family:Poppins, sans-serif;
       background:var(--ivory);
       color:var(--dark);
+      overflow-x:hidden;
     }
 
+    /* HEADER */
     header{
       display:flex;
       justify-content:space-between;
@@ -29,37 +32,117 @@
       position:fixed;
       width:100%;
       background:rgba(249,246,239,0.95);
-      border-bottom:1px solid #e5e0d5;
       z-index:1000;
+      border-bottom:1px solid #e5e0d5;
     }
 
+    .left, .right{display:flex;gap:20px;align-items:center}
     .brand{
-      font-family:Playfair Display;
+      font-family:Playfair Display, serif;
       font-size:26px;
+      letter-spacing:1px;
       color:var(--gold);
     }
 
+    .icon{cursor:pointer;font-size:14px}
+
+    /* MENU */
+    .menu{
+      position:fixed;
+      top:0;left:-320px;
+      width:300px;height:100%;
+      background:#fff;
+      padding:30px;
+      overflow-y:auto;
+      transition:0.5s ease;
+      box-shadow:5px 0 20px rgba(0,0,0,0.1);
+      z-index:2000;
+    }
+    .menu.open{left:0}
+    .menu h3{margin:20px 0 10px;color:var(--gold)}
+    .menu p{margin:6px 0;font-size:14px;cursor:pointer}
+
+    /* HERO */
     .hero{
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
       text-align:center;
+      padding:40px;
+      animation:fadeIn 2s;
     }
 
     .hero h1{
       font-family:Playfair Display;
       font-size:48px;
+      margin-bottom:20px;
     }
 
+    .hero p{font-size:16px}
+
+    /* PRODUCTS */
+    section{padding:100px 40px}
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:#fff;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      transition:0.3s;
+    }
+    .card:hover{transform:translateY(-5px)}
+    .card h4{margin-bottom:10px}
+
     .btn{
-      margin-top:20px;
-      padding:12px 30px;
+      margin-top:15px;
+      padding:10px;
+      width:100%;
+      border:none;
       background:var(--gold);
       color:#fff;
-      border:none;
       cursor:pointer;
       border-radius:5px;
+    }
+
+    /* MODAL */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.5);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:3000;
+    }
+    .modal-content{
+      background:#fff;
+      padding:30px;
+      width:90%;
+      max-width:500px;
+      border-radius:10px;
+      animation:fadeUp 0.5s;
+    }
+
+    .options label{display:block;margin:10px 0}
+    textarea{
+      width:100%;
+      height:70px;
+      margin-top:10px;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0}
+      to{opacity:1}
+    }
+    @keyframes fadeUp{
+      from{transform:translateY(40px);opacity:0}
+      to{transform:translateY(0);opacity:1}
     }
   </style>
 </head>
@@ -67,17 +150,118 @@
 <body>
 
 <header>
-  <div class="brand">Vrénae</div>
+  <div class="left">
+    <div class="icon" onclick="toggleMenu()">☰ Menu</div>
+    <div class="brand">Vrénae</div>
+  </div>
+  <div class="right">
+    <div class="icon">🔍 Search</div>
+    <div class="icon">♡ Favourites</div>
+    <div class="icon">About</div>
+  </div>
 </header>
 
-<section class="hero">
+<!-- SIDE MENU -->
+<div class="menu" id="menu">
+  <h3>Your Account</h3>
+  <p>Your Cart</p>
+  <p>Track Your Order</p>
+
+  <h3>General</h3>
+  <p>For Men</p>
+  <p>For Women</p>
+  <p>Unisex</p>
+  <p>Fancy Baskets</p>
+  <p>Best Sellers</p>
+  <p>New Arrivals</p>
+
+  <h3>Brands</h3>
+  <p>Chanel</p>
+  <p>Dior</p>
+  <p>Gucci</p>
+  <p>Prada</p>
+  <p>YSL</p>
+  <p>Louis Vuitton</p>
+  <p>Valentino</p>
+  <p>Azzaro</p>
+  <p>Emporio Armani</p>
+  <p>Versace</p>
+  <p>Carolina Herrera</p>
+  <p>Burberry</p>
+  <p>Givenchy</p>
+  <p>Tom Ford</p>
+  <p>Jo Malone</p>
+</div>
+
+<!-- HERO -->
+<div class="hero">
   <div>
-    <h1>Luxury, Personalised Perfumes</h1>
-    <p>Create a scent that defines you.</p>
-    <button class="btn">Shop Now</button>
+    <h1>Luxury, Personalised.</h1>
+    <p>Design perfumes that speak your identity.</p>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section>
+  <h2 style="margin-bottom:30px">Featured Perfumes</h2>
+  <div class="products">
+    <div class="card">
+      <h4>Signature Gold</h4>
+      <p>₹8,500</p>
+      <button class="btn" onclick="buy()">Buy</button>
+    </div>
+    <div class="card">
+      <h4>Ivory Bloom</h4>
+      <p>₹7,200</p>
+      <button class="btn" onclick="buy()">Buy</button>
+    </div>
   </div>
 </section>
 
+<!-- BUY MODAL -->
+<div class="modal" id="buyModal">
+  <div class="modal-content">
+    <h3>Customize your perfume?</h3>
+    <button class="btn" onclick="openCustomize()">Customize</button>
+    <button class="btn" style="background:#333" onclick="addToCart()">Don’t Customize</button>
+  </div>
+</div>
+
+<!-- CUSTOMIZE MODAL -->
+<div class="modal" id="customModal">
+  <div class="modal-content">
+    <h3>Customization Options</h3>
+    <div class="options">
+      <label><input type="checkbox"> Engrave Name</label>
+      <label><input type="checkbox"> Pearls</label>
+      <label><input type="checkbox"> Outer Body Customization</label>
+    </div>
+
+    <h4 style="margin-top:15px">Extra Details</h4>
+    <label><input type="checkbox"> Bows</label>
+    <label><input type="checkbox"> Charms</label>
+
+    <textarea placeholder="Mention colour / charm / specific request"></textarea>
+    <button class="btn" onclick="addToCart()">Add to Cart</button>
+  </div>
+</div>
+
+<script>
+  function toggleMenu(){
+    document.getElementById("menu").classList.toggle("open");
+  }
+  function buy(){
+    document.getElementById("buyModal").style.display="flex";
+  }
+  function openCustomize(){
+    document.getElementById("buyModal").style.display="none";
+    document.getElementById("customModal").style.display="flex";
+  }
+  function addToCart(){
+    alert("Added to cart ✨");
+    document.querySelectorAll(".modal").forEach(m=>m.style.display="none");
+  }
+</script>
+
 </body>
 </html>
-

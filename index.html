@@ -1,3 +1,83 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-  
+<head>
+  <meta charset="UTF-8" />
+  <title>Vrénae — Customised Perfumes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#c9a24d;
+      --ivory:#f9f6ef;
+      --dark:#1c1c1c;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Poppins, sans-serif;
+      background:var(--ivory);
+      color:var(--dark);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 40px;
+      position:fixed;
+      width:100%;
+      background:rgba(249,246,239,0.95);
+      border-bottom:1px solid #e5e0d5;
+      z-index:1000;
+    }
+
+    .brand{
+      font-family:Playfair Display;
+      font-size:26px;
+      color:var(--gold);
+    }
+
+    .hero{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .hero h1{
+      font-family:Playfair Display;
+      font-size:48px;
+    }
+
+    .btn{
+      margin-top:20px;
+      padding:12px 30px;
+      background:var(--gold);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      border-radius:5px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">Vrénae</div>
+</header>
+
+<section class="hero">
+  <div>
+    <h1>Luxury, Personalised Perfumes</h1>
+    <p>Create a scent that defines you.</p>
+    <button class="btn">Shop Now</button>
+  </div>
+</section>
+
+</body>
+</html>
+
